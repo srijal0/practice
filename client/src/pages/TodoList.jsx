@@ -7,6 +7,7 @@ function TodoList() {
   const [text, setText] = useState('');
   const [dueDate, setDueDate] = useState('');
   const [category, setCategory] = useState('Other');
+  const [priority, setPriority] = useState('Medium');
   const [editingId, setEditingId] = useState(null);
   const [editText, setEditText] = useState('');
   const [filter, setFilter] = useState('all');
@@ -51,13 +52,14 @@ function TodoList() {
     const res = await fetch('http://localhost:5000/api/todos', {
       method: 'POST',
       headers: authHeaders,
-      body: JSON.stringify({ text, dueDate: dueDate || null, category }),
+      body: JSON.stringify({ text, dueDate: dueDate || null, category, priority }),
     });
     const newTodo = await res.json();
     setTodos([newTodo, ...todos]);
     setText('');
     setDueDate('');
     setCategory('Other');
+    setPriority('Medium');
   };
 
   const toggleComplete = async (id, completed) => {
@@ -147,6 +149,11 @@ function TodoList() {
           <option value="Urgent">Urgent</option>
           <option value="Other">Other</option>
         </select>
+        <select value={priority} onChange={(e) => setPriority(e.target.value)}>
+          <option value="Low">Low</option>
+          <option value="Medium">Medium</option>
+          <option value="High">High</option>
+        </select>
         <button type="submit">Add</button>
       </form>
 
@@ -185,7 +192,7 @@ function TodoList() {
 
       <ul>
         {filteredTodos.map((todo) => (
-          <li key={todo._id}>
+          <li key={todo._id} className={`priority-${todo.priority.toLowerCase()}`}>
             <input
               type="checkbox"
               checked={todo.completed}
@@ -219,6 +226,9 @@ function TodoList() {
                 )}
                 <span className={`category-badge category-${todo.category.toLowerCase()}`}>
                   {todo.category}
+                </span>
+                <span className={`priority-badge priority-badge-${todo.priority.toLowerCase()}`}>
+                  {todo.priority}
                 </span>
                 <button onClick={() => startEditing(todo)}>Edit</button>
                 <button onClick={() => deleteTodo(todo._id)}>Delete</button>

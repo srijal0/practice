@@ -23,6 +23,7 @@ router.post('/', async (req, res) => {
       text: req.body.text,
       dueDate: req.body.dueDate || null,
       category: req.body.category || 'Other',
+      priority: req.body.priority || 'Medium',
       userId: req.userId,
     });
     const savedTodo = await newTodo.save();

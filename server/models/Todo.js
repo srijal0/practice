@@ -18,6 +18,11 @@ const todoSchema = new mongoose.Schema({
     enum: ['Personal', 'Work', 'Urgent', 'Other'],
     default: 'Other',
   },
+  priority: {
+    type: String,
+    enum: ['Low', 'Medium', 'High'],
+    default: 'Medium',
+  },
   userId: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'User',

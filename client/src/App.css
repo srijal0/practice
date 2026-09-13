@@ -279,3 +279,39 @@ li button:last-of-type:hover {
 .search-input::placeholder {
   color: #a39d8f;
 }
+
+.priority-badge {
+  font-size: 12px;
+  font-weight: 600;
+  padding: 3px 8px;
+  border-radius: 6px;
+  white-space: nowrap;
+  flex: none;
+}
+
+.priority-badge-low {
+  background: #e8f0e5;
+  color: #6a8a5f;
+}
+
+.priority-badge-medium {
+  background: #fbf3e0;
+  color: #b8862f;
+}
+
+.priority-badge-high {
+  background: #fbe5e0;
+  color: #c1543f;
+}
+
+li.priority-high {
+  border-left: 3px solid #d97b66;
+}
+
+li.priority-medium {
+  border-left: 3px solid #e0b84f;
+}
+
+li.priority-low {
+  border-left: 3px solid #a3c299;
+}
