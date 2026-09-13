@@ -6,6 +6,7 @@ function App() {
   const [text, setText] = useState('');
   const [editingId, setEditingId] = useState(null);
   const [editText, setEditText] = useState('');
+  const [filter, setFilter] = useState('all');
 
   useEffect(() => {
     fetchTodos();
@@ -72,6 +73,12 @@ function App() {
     setEditText('');
   };
 
+  const filteredTodos = todos.filter((todo) => {
+    if (filter === 'active') return !todo.completed;
+    if (filter === 'completed') return todo.completed;
+    return true; // 'all'
+  });
+
   return (
     <div className="app">
       <h1>My Todo List</h1>
@@ -86,8 +93,29 @@ function App() {
         <button type="submit">Add</button>
       </form>
 
+      <div className="filters">
+        <button
+          className={filter === 'all' ? 'active-filter' : ''}
+          onClick={() => setFilter('all')}
+        >
+          All
+        </button>
+        <button
+          className={filter === 'active' ? 'active-filter' : ''}
+          onClick={() => setFilter('active')}
+        >
+          Active
+        </button>
+        <button
+          className={filter === 'completed' ? 'active-filter' : ''}
+          onClick={() => setFilter('completed')}
+        >
+          Completed
+        </button>
+      </div>
+
       <ul>
-        {todos.map((todo) => (
+        {filteredTodos.map((todo) => (
           <li key={todo._id}>
             <input
               type="checkbox"
