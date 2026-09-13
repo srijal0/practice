@@ -257,5 +257,25 @@ li button:last-of-type:hover {
 .remaining-count {
   font-size: 13px;
   color: #a39d8f;
-  margin: -12px 0 30px;
+  margin: -12px 0 20px;
+}
+
+.search-input {
+  width: 100%;
+  padding: 10px 14px;
+  font-size: 14px;
+  border: 1px solid #e5dfd3;
+  border-radius: 8px;
+  margin-bottom: 16px;
+  outline: none;
+  background: #ffffff;
+  color: #2b2a28;
+}
+
+.search-input:focus {
+  border-color: #7a9471;
+}
+
+.search-input::placeholder {
+  color: #a39d8f;
 }

@@ -10,6 +10,7 @@ function TodoList() {
   const [editingId, setEditingId] = useState(null);
   const [editText, setEditText] = useState('');
   const [filter, setFilter] = useState('all');
+  const [search, setSearch] = useState('');
   const navigate = useNavigate();
 
   const token = localStorage.getItem('token');
@@ -107,9 +108,14 @@ function TodoList() {
   };
 
   const filteredTodos = todos.filter((todo) => {
-    if (filter === 'active') return !todo.completed;
-    if (filter === 'completed') return todo.completed;
-    return true; // 'all'
+    const matchesFilter =
+      filter === 'active' ? !todo.completed :
+      filter === 'completed' ? todo.completed :
+      true;
+
+    const matchesSearch = todo.text.toLowerCase().includes(search.toLowerCase());
+
+    return matchesFilter && matchesSearch;
   });
 
   const remainingCount = todos.filter((t) => !t.completed).length;
@@ -143,6 +149,14 @@ function TodoList() {
         </select>
         <button type="submit">Add</button>
       </form>
+
+      <input
+        type="text"
+        className="search-input"
+        value={search}
+        onChange={(e) => setSearch(e.target.value)}
+        placeholder="Search todos..."
+      />
 
       <div className="filters">
         <button
