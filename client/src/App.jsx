@@ -4,6 +4,7 @@ import './App.css';
 function App() {
   const [todos, setTodos] = useState([]);
   const [text, setText] = useState('');
+  const [dueDate, setDueDate] = useState('');
   const [editingId, setEditingId] = useState(null);
   const [editText, setEditText] = useState('');
   const [filter, setFilter] = useState('all');
@@ -25,11 +26,12 @@ function App() {
     const res = await fetch('http://localhost:5000/api/todos', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ text }),
+      body: JSON.stringify({ text, dueDate: dueDate || null }),
     });
     const newTodo = await res.json();
     setTodos([newTodo, ...todos]);
     setText('');
+    setDueDate('');
   };
 
   const toggleComplete = async (id, completed) => {
@@ -90,6 +92,11 @@ function App() {
           onChange={(e) => setText(e.target.value)}
           placeholder="What needs to be done?"
         />
+        <input
+          type="date"
+          value={dueDate}
+          onChange={(e) => setDueDate(e.target.value)}
+        />
         <button type="submit">Add</button>
       </form>
 
@@ -143,6 +150,11 @@ function App() {
                 >
                   {todo.text}
                 </span>
+                {todo.dueDate && (
+                  <span className="due-date">
+                    Due {new Date(todo.dueDate).toLocaleDateString()}
+                  </span>
+                )}
                 <button onClick={() => startEditing(todo)}>Edit</button>
                 <button onClick={() => deleteTodo(todo._id)}>Delete</button>
               </>
