@@ -14,7 +14,6 @@ function TodoList() {
 
   const token = localStorage.getItem('token');
 
-  // Helper: standard headers including the auth token
   const authHeaders = {
     'Content-Type': 'application/json',
     Authorization: `Bearer ${token}`,
@@ -113,6 +112,8 @@ function TodoList() {
     return true; // 'all'
   });
 
+  const remainingCount = todos.filter((t) => !t.completed).length;
+
   return (
     <div className="app">
       <div className="app-header">
@@ -163,6 +164,10 @@ function TodoList() {
           Completed
         </button>
       </div>
+
+      <p className="remaining-count">
+        {remainingCount} {remainingCount === 1 ? 'task' : 'tasks'} remaining
+      </p>
 
       <ul>
         {filteredTodos.map((todo) => (

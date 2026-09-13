@@ -253,3 +253,9 @@ li button:last-of-type:hover {
   border-color: #d97b66;
   color: #d97b66;
 }
+
+.remaining-count {
+  font-size: 13px;
+  color: #a39d8f;
+  margin: -12px 0 20px;
+}
