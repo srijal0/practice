@@ -25,12 +25,14 @@ h1 {
 
 form {
   display: flex;
+  flex-wrap: wrap;
   gap: 8px;
   margin-bottom: 20px;
 }
 
 form input[type='text'] {
   flex: 1;
+  min-width: 160px;
   padding: 12px 14px;
   font-size: 15px;
   border: 1px solid #e5dfd3;
@@ -49,7 +51,8 @@ form input[type='text']::placeholder {
   color: #a39d8f;
 }
 
-form input[type='date'] {
+form input[type='date'],
+form select {
   padding: 12px 10px;
   font-size: 14px;
   border: 1px solid #e5dfd3;
@@ -60,7 +63,8 @@ form input[type='date'] {
   transition: border-color 0.15s ease;
 }
 
-form input[type='date']:focus {
+form input[type='date']:focus,
+form select:focus {
   border-color: #7a9471;
 }
 
@@ -191,4 +195,33 @@ li button:last-of-type:hover {
   border-radius: 6px;
   white-space: nowrap;
   flex: none;
+}
+
+.category-badge {
+  font-size: 12px;
+  font-weight: 600;
+  padding: 3px 8px;
+  border-radius: 6px;
+  white-space: nowrap;
+  flex: none;
+}
+
+.category-personal {
+  background: #e3ecf7;
+  color: #4a6fa5;
+}
+
+.category-work {
+  background: #f0e6f7;
+  color: #8a5fa8;
+}
+
+.category-urgent {
+  background: #fbe5e0;
+  color: #c1543f;
+}
+
+.category-other {
+  background: #f2ede2;
+  color: #6b675e;
 }

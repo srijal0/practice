@@ -13,6 +13,11 @@ const todoSchema = new mongoose.Schema({
     type: Date,
     default: null,
   },
+  category: {
+    type: String,
+    enum: ['Personal', 'Work', 'Urgent', 'Other'],
+    default: 'Other',
+  },
 }, { timestamps: true });
 
 module.exports = mongoose.model('Todo', todoSchema);

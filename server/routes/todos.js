@@ -18,6 +18,7 @@ router.post('/', async (req, res) => {
     const newTodo = new Todo({
       text: req.body.text,
       dueDate: req.body.dueDate || null,
+      category: req.body.category || 'Other',
     });
     const savedTodo = await newTodo.save();
     res.status(201).json(savedTodo);

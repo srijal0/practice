@@ -5,6 +5,7 @@ function App() {
   const [todos, setTodos] = useState([]);
   const [text, setText] = useState('');
   const [dueDate, setDueDate] = useState('');
+  const [category, setCategory] = useState('Other');
   const [editingId, setEditingId] = useState(null);
   const [editText, setEditText] = useState('');
   const [filter, setFilter] = useState('all');
@@ -26,12 +27,13 @@ function App() {
     const res = await fetch('http://localhost:5000/api/todos', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ text, dueDate: dueDate || null }),
+      body: JSON.stringify({ text, dueDate: dueDate || null, category }),
     });
     const newTodo = await res.json();
     setTodos([newTodo, ...todos]);
     setText('');
     setDueDate('');
+    setCategory('Other');
   };
 
   const toggleComplete = async (id, completed) => {
@@ -97,6 +99,12 @@ function App() {
           value={dueDate}
           onChange={(e) => setDueDate(e.target.value)}
         />
+        <select value={category} onChange={(e) => setCategory(e.target.value)}>
+          <option value="Personal">Personal</option>
+          <option value="Work">Work</option>
+          <option value="Urgent">Urgent</option>
+          <option value="Other">Other</option>
+        </select>
         <button type="submit">Add</button>
       </form>
 
@@ -155,6 +163,9 @@ function App() {
                     Due {new Date(todo.dueDate).toLocaleDateString()}
                   </span>
                 )}
+                <span className={`category-badge category-${todo.category.toLowerCase()}`}>
+                  {todo.category}
+                </span>
                 <button onClick={() => startEditing(todo)}>Edit</button>
                 <button onClick={() => deleteTodo(todo._id)}>Delete</button>
               </>
