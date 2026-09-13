@@ -225,3 +225,31 @@ li button:last-of-type:hover {
   background: #f2ede2;
   color: #6b675e;
 }
+
+.app-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 32px;
+}
+
+.app-header h1 {
+  margin: 0;
+}
+
+.logout-btn {
+  padding: 8px 16px;
+  font-size: 13px;
+  font-weight: 600;
+  border: 1px solid #e5dfd3;
+  border-radius: 8px;
+  background: transparent;
+  color: #6b675e;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.logout-btn:hover {
+  border-color: #d97b66;
+  color: #d97b66;
+}

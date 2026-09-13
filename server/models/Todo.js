@@ -18,6 +18,11 @@ const todoSchema = new mongoose.Schema({
     enum: ['Personal', 'Work', 'Urgent', 'Other'],
     default: 'Other',
   },
+  userId: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'User',
+    required: true,
+  },
 }, { timestamps: true });
 
 module.exports = mongoose.model('Todo', todoSchema);
